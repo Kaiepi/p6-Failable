@@ -8,7 +8,7 @@ method ^parameterize($, Mu:U \T --> Mu:U) {
 
     %cache{T.WHICH} := Metamodel::SubsetHOW.new_type:
         name       => 'Failable[' ~ T.^name ~ ']',
-        refinee    => Any,
+        refinee    => T ~~ Junction ?? Mu !! Any,
         refinement => T | Failure;
 }
 

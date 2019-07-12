@@ -18,8 +18,7 @@ my class Goblin { }
 my class Elf    { }
 
 lives-ok {
-    my Failable[Junction] $what-am-i = none Goblin, Elf;
-    $what-am-i = Failure.new: "I'm a gnome!";
+    my Failable[Junction] $gnome = none Goblin, Elf;
 }, 'can parameterize a Failure with a Junction and assign to it';
 
 # vim: ft=perl6 ts=4 sts=4 sw=4 expandtab
