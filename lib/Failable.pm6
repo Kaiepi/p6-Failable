@@ -1,5 +1,5 @@
 use v6.d;
-unit class Failable:ver<0.0.1>:auth<github:Kaiepi>;
+unit class Failable:ver<0.0.2>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt};
 
