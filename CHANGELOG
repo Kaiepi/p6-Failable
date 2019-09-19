@@ -5,3 +5,8 @@ v0.0.1:
 
 v0.0.2:
     - Nothing changed, I just screwed up v0.0.1's CPAN upload
+
+v0.0.3:
+    - Assignments of Failable to Failure or its refinee's type no longer
+      throws.
+    - Failable now uses v6, not v6.d.

@@ -1,5 +1,5 @@
 use v6;
-unit class Failable:ver<0.0.2>:auth<github:Kaiepi>;
+unit class Failable:ver<0.0.3>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt:D};
 
@@ -55,7 +55,7 @@ fail.
 
 =head1 AUTHOR
 
-Ben Davies <Kaiepi>
+Ben Davies (Kaiepi)
 
 =head1 COPYRIGHT AND LICENSE
 

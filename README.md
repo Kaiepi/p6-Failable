@@ -33,7 +33,7 @@ Failable is a class for creating Failure sum types. Parameterizing Failable crea
 AUTHOR
 ======
 
-Ben Davies <Kaiepi>
+Ben Davies (Kaiepi)
 
 COPYRIGHT AND LICENSE
 =====================
