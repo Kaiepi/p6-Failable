@@ -1,15 +1,22 @@
 use v6.d;
 unit class Failable:ver<0.0.2>:auth<github:Kaiepi>;
 
-my Mu:U %cache{ObjAt};
+my Mu:U %cache{ObjAt:D};
 
-method ^parameterize($, Mu:U \T --> Mu:U) {
+method ^parameterize(Mu:U $, Mu:U \T --> Mu:U) {
     return %cache{T.WHICH} if %cache{T.WHICH}:exists;
 
-    %cache{T.WHICH} := Metamodel::SubsetHOW.new_type:
-        name       => 'Failable[' ~ T.^name ~ ']',
-        refinee    => T ~~ Junction ?? Mu !! Any,
-        refinement => T | Failure;
+    my Mu:U $failable;
+
+    BEGIN {
+        my Str:D      $name       = 'Failable[' ~ T.^name ~ ']';
+        my Mu:U       $refinee    = (T ~~ Junction:_) ?? Mu:_ !! Any:_;
+        my Junction:D $refinement = T | Failure:D;
+        $failable := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
+        $*W.add_object_if_no_sc: $failable;
+    }
+
+    $failable
 }
 
 =begin pod
