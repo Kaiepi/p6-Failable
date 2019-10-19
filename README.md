@@ -11,18 +11,19 @@ SYNOPSIS
 ```perl6
 use Failable;
 
-sub dk-spank-permission-check(--> Str) {
-    fail 'Not a chance.' if state $++;
-    'You may spank it... once.'
+sub cat(*@params --> Str:D) {
+    my Proc:D $proc = run "cat", |@params, :out, :err;
+    my Str:D  $out  = $proc.out.slurp(:close);
+    my Str:D  $err  = $proc.err.slurp(:close);
+    fail $err if $err;
+    $out
 }
 
-my Failable[Str] $res = dk-spank-permission-check;
-say $res.WHAT; # OUTPUT: Str
-say $res;      # OUTPUT: You may spank it... once.
+my Failable[Str:D] $output = cat "/etc/hosts";
+say $output.WHAT; # OUTPUT: (Str)
 
-$res = dk-spank-permission-check;
-say $res.WHAT;              # OUTPUT: Failure
-say $res.exception.message; # OUTPUT: Not a chance.
+my Failable[Str:D] $error = cat '.';
+say $error.WHAT; # OUTPUT: (Failure)
 ```
 
 DESCRIPTION
