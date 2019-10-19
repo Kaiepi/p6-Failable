@@ -10,3 +10,11 @@ v0.0.3:
     - Assignments of Failable to Failure or its refinee's type no longer
       throws.
     - Failable now uses v6, not v6.d.
+
+v0.1.0:
+    - Failable subsets are now cached
+    - Parameterizing Failable should no longer return Mu in certain cases
+    - Failable now supports parameterization with types that use custom HOWs,
+      so long as they are Mu.
+    - Failable can now be parameterized with definite values
+    - The synopsis is no longer NSFW
