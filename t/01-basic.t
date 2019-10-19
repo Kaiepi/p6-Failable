@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Failable;
 
-plan 7;
+plan 11;
 
 {
     sub dk-spank-permission-check(--> Str:_) {
@@ -47,7 +47,36 @@ plan 7;
 
     lives-ok {
         my Failable[Junction:D] $gnome = none Goblin, Elf;
-    }, 'can parameterize a Failure with a Junction and assign to it';
+    }, 'can parameterize a Failable with a Junction and assign to it';
 }
 
-# vim: ft=perl6 ts=4 sts=4 sw=4 expandtab
+{
+    my class NotAnyHOW is Metamodel::ClassHOW { }
+
+    BEGIN {
+        NotAnyHOW.set_default_invoke_handler: Mu.HOW.invocation_handler: Mu;
+        NotAnyHOW.set_default_parent_type: Mu;
+    }
+
+    my constant NotAny = do {
+        $_ := NotAnyHOW.new_type: :name('NotAny');
+        $_.^compose
+    };
+
+    is Failable[Any].^refinee, Any,
+       'can type check Any against a Failable with Any';
+    is Failable[Mu].^refinee, Mu,
+       'can type check Mu against a Failable with Mu';
+    is Failable[NotAny].^refinee, Mu,
+       'can type check Mu against a Failable with any type that is not Any';
+}
+
+{
+    my subset MaybeFunnyNumber of Int:_ where 68 | 419 | Nil;
+
+    my Failable[MaybeFunnyNumber:_] $nil = Nil;
+    isa-ok $nil, Failable[MaybeFunnyNumber:_],
+           "can assign Nil to a Failable with a subset, returning the Failable's type object";
+}
+
+# vim: ft=perl6 sw=4 ts=4 sts=4 expandtab

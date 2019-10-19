@@ -1,4 +1,5 @@
 use v6;
+use nqp;
 unit class Failable:ver<0.0.3>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt:D};
@@ -6,15 +7,11 @@ my Mu:U %cache{ObjAt:D};
 method ^parameterize(Mu:U $, Mu:U \T --> Mu:U) {
     return %cache{T.WHICH} if %cache{T.WHICH}:exists;
 
-    my Mu:U $failable;
-
-    BEGIN {
-        my Str:D      $name       = 'Failable[' ~ T.^name ~ ']';
-        my Mu:U       $refinee    = (T ~~ Junction:_) ?? Mu:_ !! Any:_;
-        my Junction:D $refinement = T | Failure:D;
-        $failable := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
-        $*W.add_object_if_no_sc: $failable;
-    }
+    my str        $name        = 'Failable[' ~ T.^name ~ ']';
+    my Mu:U       $refinee     = nqp::istype(T, Any) ?? Any !! Mu;
+    my Junction:D $refinement  = T | Failure:D;
+    my            $failable   := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
+    $*W.add_object_if_no_sc: $failable if nqp::isconcrete(nqp::getlexdyn('$*W'));
 
     %cache{T.WHICH} := $failable;
 }
