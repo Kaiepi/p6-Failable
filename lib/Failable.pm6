@@ -16,7 +16,7 @@ method ^parameterize(Mu:U $, Mu:U \T --> Mu:U) {
         $*W.add_object_if_no_sc: $failable;
     }
 
-    $failable
+    %cache{T.WHICH} := $failable;
 }
 
 =begin pod
