@@ -4,7 +4,7 @@ unit class Failable:ver<0.0.3>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt:D};
 
-method ^parameterize(Mu:U $, Mu:U \T --> Mu:U) {
+method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
     return %cache{T.WHICH} if %cache{T.WHICH}:exists;
 
     my str        $name        = 'Failable[' ~ T.^name ~ ']';

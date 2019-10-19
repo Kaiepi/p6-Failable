@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Failable;
 
-plan 11;
+plan 12;
 
 {
     sub dk-spank-permission-check(--> Str:_) {
@@ -77,6 +77,12 @@ plan 11;
     my Failable[MaybeFunnyNumber:_] $nil = Nil;
     isa-ok $nil, Failable[MaybeFunnyNumber:_],
            "can assign Nil to a Failable with a subset, returning the Failable's type object";
+}
+
+{
+    lives-ok {
+        my Failable[1] $one = 1;
+    }, 'can use definite types with Failable';
 }
 
 # vim: ft=perl6 sw=4 ts=4 sts=4 expandtab
