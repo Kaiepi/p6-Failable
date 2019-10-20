@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Failable;
 
-plan 12;
+plan 13;
 
 {
     sub dk-spank-permission-check(--> Str:_) {
@@ -69,6 +69,11 @@ plan 12;
        'can type check Mu against a Failable with Mu';
     is Failable[NotAny].^refinee, Mu,
        'can type check Mu against a Failable with any type that is not Any';
+}
+
+{
+    is Failable[Int:D], Failable[Int:D],
+       'Failable caches the subsets it creates';
 }
 
 {

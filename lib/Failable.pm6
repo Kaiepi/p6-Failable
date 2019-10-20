@@ -5,7 +5,8 @@ unit class Failable:ver<0.1.0>:auth<github:Kaiepi>;
 my Mu:U %cache{ObjAt:D};
 
 method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
-    return %cache{T.WHICH} if %cache{T.WHICH}:exists;
+    my ObjAt:D $which := T.WHICH;
+    return %cache{$which} if %cache{$which}:exists;
 
     my str        $name        = 'Failable[' ~ T.^name ~ ']';
     my Mu:U       $refinee     = nqp::istype(T, Any) ?? Any !! Mu;
@@ -13,7 +14,7 @@ method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
     my            $failable   := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
     $*W.add_object_if_no_sc: $failable if nqp::isconcrete(nqp::getlexdyn('$*W'));
 
-    %cache{T.WHICH} := $failable;
+    %cache{$which} := $failable;
 }
 
 =begin pod
