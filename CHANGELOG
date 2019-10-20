@@ -21,3 +21,6 @@ v0.1.0:
 
 v0.1.1:
     - Make a minor optimization to and unit test caching
+
+v0.1.2:
+    - Failable no longer breaks serialization of modules that use it

@@ -1,6 +1,6 @@
 use v6;
 use nqp;
-unit class Failable:ver<0.1.1>:auth<github:Kaiepi>;
+unit class Failable:ver<0.1.2>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt:D};
 
