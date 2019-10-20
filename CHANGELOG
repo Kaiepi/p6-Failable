@@ -18,3 +18,6 @@ v0.1.0:
       so long as they are Mu.
     - Failable can now be parameterized with definite values
     - The synopsis is no longer NSFW
+
+v0.1.1:
+    - Make a minor optimization to and unit test caching
