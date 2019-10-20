@@ -8,7 +8,7 @@ method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
     my ObjAt:D $which := T.WHICH;
     return %cache{$which} if %cache{$which}:exists;
 
-    my str        $name        = 'Failable[' ~ T.^name ~ ']';
+    my Str:D      $name        = 'Failable[' ~ T.^name ~ ']';
     my Mu:U       $refinee     = nqp::istype(T, Any) ?? Any !! Mu;
     my Junction:D $refinement  = T | Failure:D;
     my            $failable   := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
