@@ -8,10 +8,10 @@ method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
     my ObjAt:D $which := T.WHICH;
     return %cache{$which} if %cache{$which}:exists;
 
-    my Str:D      $name        = 'Failable[' ~ T.^name ~ ']';
-    my Mu:U       $refinee     = nqp::istype(T, Any) ?? Any !! Mu;
-    my Junction:D $refinement  = T | Failure:D;
-    my            $failable   := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
+    my Str:D  $name        = 'Failable[' ~ T.^name ~ ']';
+    my Mu:U   $refinee     = nqp::istype(T, Any) ?? Any !! Mu;
+    my Code:D $refinement  = { $_ ~~ T | Failure:D };
+    my        $failable   := Metamodel::SubsetHOW.new_type: :$name, :$refinee, :$refinement;
     $*W.add_object_if_no_sc: $failable if nqp::isconcrete(nqp::getlexdyn('$*W'));
 
     %cache{$which} := $failable;
