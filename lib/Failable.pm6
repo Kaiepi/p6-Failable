@@ -4,7 +4,7 @@ unit class Failable:ver<0.1.2>:auth<github:Kaiepi>;
 
 my Mu:U %cache{ObjAt:D};
 
-method ^parameterize(Mu:U $, Mu:_ \T --> Mu:U) {
+method ^parameterize(Mu:U $, Mu \T --> Mu:U) {
     my ObjAt:D $which := T.WHICH;
     return %cache{$which} if %cache{$which}:exists;
 
